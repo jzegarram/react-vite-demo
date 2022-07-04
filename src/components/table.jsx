@@ -12,40 +12,49 @@ import usersService from "../services/user.service"
 import { usePreviousProps } from '@mui/utils';
 
 export default function BasicTable() {
+    
+    // const BASE_URL = "https://jsonplaceholder.typicode.com";
+
+    const [users, setUsers] = useState([])
+    
     // useEffect(()=>{
 
-    //     fetch('https://jsonplaceholder.typicode.com/users')
+    //     fetch(`${BASE_URL}/users`)
     //     .then(response => response.json())
-    //     .then(json => console.log(json))
+    //     .then(json => setUsers(json))
         
     // }, [])
 
-    const [users, setUsers] = useState([])
-
-    // const baseURL = "https://jsonplaceholder.typicode.com";
 
     // useEffect(async() => {
+
     //     axios.get(`${baseURL}/users`).then((response) => {
     //       setUsers(response.data);
     //     });
+
     //   }, []);
  
  
-useEffect(async() => {
-    const u = await usersService.getUsers()
-    return setUsers(u)
-}, []);
+    useEffect(() => {
+
+        async function fetchData() {
+            const remoteUsers = await usersService.getUsers()
+            setUsers(remoteUsers)
+        }
+        fetchData()
+
+    }, []);
 
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Username</TableCell>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Web</TableCell>
-            <TableCell align="right">City</TableCell>
+            <TableCell><b>Name</b></TableCell>
+            <TableCell align="right"><b>Username</b></TableCell>
+            <TableCell align="right"><b>Email</b></TableCell>
+            <TableCell align="right"><b>Web</b></TableCell>
+            <TableCell align="right"><b>City</b></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

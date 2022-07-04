@@ -1,11 +1,12 @@
-import './App.css'
-import BasicTable from './components/table'
+import './App.css';
+import BasicTable from './components/table';
+import { Typography } from '@mui/material';
 
 function App() {
 
   return (
     <>
-      <div>Hola</div>
+      <Typography variant="h2">Fake Users</Typography>
       <BasicTable />
     </>
   )
